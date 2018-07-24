@@ -163,9 +163,6 @@ Some late-bound types couldn't be resolved:
                 GraphQL::Query::Arguments.construct_arguments_class(type_defn)
               end
             end
-          elsif !prev_type.equal?(type_defn)
-            # If the previous entry in the map isn't the same object we just found, raise.
-            raise("Duplicate type definition found for name '#{type_defn.name}' at '#{context_description}' (#{prev_type.metadata[:type_class] || prev_type}, #{type_defn.metadata[:type_class] || type_defn})")
           end
         when Class
           if member.respond_to?(:graphql_definition)
