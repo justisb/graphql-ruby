@@ -33,7 +33,9 @@ module GraphQL
               null = false
               parse_type(type_expr[0..-2], null: true)
             else
-              maybe_type = Object.const_get(type_expr)
+              maybe_type = type_expr.to_s.split('::').inject(Object) do |last_const, part|
+                last_const.const_get(part)
+              end
               case maybe_type
               when GraphQL::BaseType
                 maybe_type
